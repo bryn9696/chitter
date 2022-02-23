@@ -1,4 +1,7 @@
 # chitter
+
+Run Bundle install
+
 Features:
 -------
 
