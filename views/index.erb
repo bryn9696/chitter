@@ -1,1 +1,16 @@
-<h1> Hello </h1>
+<body>
+  <%# header %>
+  <header id='top-bar'>
+    <div id='logo'></div>
+    <h1> Chitter </h1>
+  </header> 
+  <%# login sign up buttons %>
+  <div id='login-signup-container'>
+      <form action="/login" method="get">
+        <input type="submit" value="Login" id='login-btn'>
+      </form>
+      <form action="/sign_up" method="get">
+        <input type="submit" value="Sign Up" id='signup-btn'>
+      </form>
+  </div>
+</body>
