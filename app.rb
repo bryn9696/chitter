@@ -4,6 +4,7 @@ require 'webrick'
 # require_relative './lib/chitter'
 require './database_connection_setup'
 require_relative './lib/user'
+require './lib/peeps'
 
 class Chitter < Sinatra::Base
   enable :sessions
@@ -13,6 +14,7 @@ class Chitter < Sinatra::Base
   end
 
   get '/' do
+    @peeps = Peeps.view_peeps
     erb :index
   end
 
@@ -42,12 +44,17 @@ class Chitter < Sinatra::Base
   get '/home' do
     if User.valid(session[:username], session[:password])
       session[:user_id] = User.user_id(username: session[:username])
-      # @listings = MakersBnb_Listings.view_listings
+      @peeps = Peeps.view_peeps
       @username = session[:username]
       erb :home
     else
       redirect '/login'
     end    
+  end
+
+  post '/peeps' do
+    @peeps
+    eb :home
   end
 
 end
