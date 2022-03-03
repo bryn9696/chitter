@@ -2,9 +2,13 @@ require './lib/database_connection'
 
 class Peeps
 
-  def self.create_peep(peep:)
-    DatabaseConnection.query("INSERT INTO peeps (peep) VALUES($1) RETURNING peep;", [peep]
+  def self.create_peep(peep:, user_id:)
+    DatabaseConnection.query("INSERT INTO peeps (peep, user_id:) VALUES($1, $2) RETURNING peep, user_id;", [peep, user_id]
       )
+      # r = DatabaseConnection.query("INSERT INTO peeps (peep, user_id:) VALUES($1, $2) RETURNING peep, user_id;", [peep, user_id]
+      # )
+      # p '**************'
+      # p r
   end
 
   # def self.create_peep(peep)

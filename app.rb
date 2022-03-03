@@ -15,6 +15,7 @@ class Chitter < Sinatra::Base
 
   get '/' do
     @peeps = Peeps.view_peeps
+    @pe = Peeps.create_peep(peep: params[:peep])
     erb :index
   end
 
@@ -45,16 +46,21 @@ class Chitter < Sinatra::Base
     if User.valid(session[:username], session[:password])
       session[:user_id] = User.user_id(username: session[:username])
       @peeps = Peeps.view_peeps
+      @pe = Peeps.create_peep(peep: params[:peep])
       @username = session[:username]
+      # p @peep
+      
       erb :home
     else
       redirect '/login'
     end    
   end
 
-  post '/peeps' do
-    @peeps
-    eb :home
+  post '/peep_created' do
+    @peeps = Peeps.view_peeps
+      @pe = Peeps.create_peep(peep: params[:peep])
+      @peep = params['peep']
+      erb :'/peep_created'    
   end
 
 end
